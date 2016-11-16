@@ -193,8 +193,8 @@ local config = {
 		minValue = 1,
 		maxValue = 15
 	},
-	groupInstalledApps = {
-		text = "Group installed apps",
+	groupInstalledPlugins = {
+		text = "Group installed plugins",
 		value = true
 	},
 	--[[ enableAnalytics = {
@@ -800,7 +800,7 @@ function sortAppList()
 	end
 	parsedApplist = parsedApplistKeyFixed
 	table.sort(parsedApplist, sortModes[sortMode].sortFunction)
-	if config.groupInstalledApps.value then
+	if config.groupInstalledPlugins.value then
 		local appsByState = {}
 		local iS = INSTALLED_STATE.NOT_INSTALLED
 		for k,v in pairs(parsedApplist) do
