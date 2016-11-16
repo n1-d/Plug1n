@@ -1,2 +1,4 @@
 # Ignore Build Directory
 build/
+*.psd
+assets/icon.sai
