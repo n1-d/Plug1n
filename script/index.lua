@@ -1,13 +1,13 @@
 --[[
-	Homebr3w
-	
+	Ch3at
+
 	A Homebrew Application to download other Homebrew
 	Apps based on TitleDB.com's database
-	
-	Homebr3w is licensed under GPL 3.0, the full license
+
+	Ch3at is licensed under GPL 3.0, the full license
 	can be found in the root of this repository inside of
 	the LICENSE or LICENSE.md file.
-	
+
 	Copyright (C) 2016 https://github.com/Wolvan
 ]]--
 
@@ -55,7 +55,7 @@ local LIB_TYPES = {
 		type			--The type of library that can be used. Can either be LIB_TYPES.LIBRARY for unzipped or LIB_TYPES.ARCHIVE for zipped libraries
 	Zipped libraries also has 1 more key/value pair that needs to be defined:
 		fileToExtract	--The filename of the file inside of the archive that needs to be extracted to APP_DIR/Libraries
-	
+
 	Example library definitions:
 	{
 		name = "dkjson",
@@ -197,10 +197,10 @@ local config = {
 		text = "Group installed apps",
 		value = true
 	},
-	enableAnalytics = {
+	--[[ enableAnalytics = {
 		text = "Enable analytics",
 		value = true
-	},
+	}, ]]--
 	hideUninstallWarning = {
 		text = "Skip warning before uninstall",
 		value = false
@@ -359,7 +359,7 @@ function loadTable(filename, defaulttbl)
 		saveTable(filename, defaulttbl)
 	end
 	local file = io.open(filename, FREAD)
-	
+
 	local filesize = 0
 	filesize = tonumber(io.size(file))
 	if filesize == 0 then
@@ -367,7 +367,7 @@ function loadTable(filename, defaulttbl)
 		saveTable(filename, defaulttbl)
 		file = io.open(filename, FREAD)
 	end
-	
+
 	local file_contents = io.read(file, 0, tonumber(io.size(file)))
 	io.close(file)
 	local loaded_config = libraries["dkjson"].decode(file_contents)
@@ -382,7 +382,7 @@ end
 	Functions to save and load config from a config
 	file. The config table gets encoded as JSON file
 	and saved to the SD.
-	Loading reads that file (or creates it if it 
+	Loading reads that file (or creates it if it
 	doesn't exist before reading), decodes the JSON
 	and then overwrites each value of the config
 	table that is defined in the decoded JSON Object.
@@ -447,18 +447,18 @@ function parseVersion(verString)
 	if verString == nil or verString == "" then
 		verString = "0.0.0"
 	end
-	
+
 	verString = verString:gsub(" ", "")
 	local version = {}
 	local splitVersion = verString:split(".")
 	if splitVersion[1]:lower():startsWith("v") then
 		splitVersion[1] = splitVersion[1]:sub(2)
 	end
-	
+
 	version.major = tonumber(splitVersion[1]) or 0
 	version.minor = tonumber(splitVersion[2]) or 0
 	version.patch = tonumber(splitVersion[3]) or 0
-	
+
 	return version
 end
 function isUpdateAvailable(localVersion, remoteVersion)
@@ -492,7 +492,7 @@ end
 
 --[[
 	Check App State to close the App in case
-	of exitting from home menu. 
+	of exitting from home menu.
 	Function should be used in every while
 	loop that allows going to Homemenu by
 	pressing HOME!
@@ -512,7 +512,7 @@ function getFile(path, downloadURL, method, data)
 	if not data then data = {} end
 	System.deleteFile(path)
 	local jsondata = "[]"
-	if config.enableAnalytics.value then
+--[[	if config.enableAnalytics.value then
 		local cUUID = dataStore.client_uuid or "00000000-0000-0000-0000-000000000000"
 		if downloadURL:find("?") then
 			if cUUID then downloadURL = downloadURL.."&ch3atUUID="..cUUID end
@@ -520,8 +520,8 @@ function getFile(path, downloadURL, method, data)
 			if cUUID then downloadURL = downloadURL.."?ch3atUUID="..cUUID end
 		end
 		jsondata = '{"ch3atUUID":"'..cUUID..'"}'
-		data.homebr3wUUID = cUUID
-	end
+		data.Ch3atUUID = cUUID
+	end ]]--
 	if libraries["dkjson"] then
 		jsondata = libraries["dkjson"].encode(data)
 	end
@@ -552,7 +552,7 @@ function getJSON(url, method, data)
 	end
 	local tbl = {}
 	local jsondata = "[]"
-	if config.enableAnalytics.value then
+--[[	if config.enableAnalytics.value then
 		local cUUID = dataStore.client_uuid or "00000000-0000-0000-0000-000000000000"
 		if url:find("?") then
 			if cUUID then url = url.."&ch3atUUID="..cUUID end
@@ -560,8 +560,8 @@ function getJSON(url, method, data)
 			if cUUID then url = url.."?ch3atUUID="..cUUID end
 		end
 		jsondata = '{"ch3atUUID":"'..cUUID..'"}'
-		data.homebr3wUUID = cUUID
-	end
+		data.Ch3atUUID = cUUID
+	end ]]--
 	if libraries["dkjson"] then
 		jsondata = libraries["dkjson"].encode(data)
 	end
@@ -859,7 +859,7 @@ end
 	to SD
 ]]--
 function downloadAndInstall(titleid)
-	
+
 	oldpad = pad
 	Screen.waitVblankStart()
 	Screen.refresh()
@@ -880,7 +880,7 @@ function downloadAndInstall(titleid)
 			success = getFile(path, downloadURL)
 			tries = tries + 1
 		end
-		
+
 		if success then
 			Screen.debugPrint(270, line, "[OK]", GREEN, TOP_SCREEN)
 			if System.checkBuild() == 1 then
@@ -897,18 +897,18 @@ function downloadAndInstall(titleid)
 				mtimeCache[title.titleid] = title.mtime
 				saveTable(APP_DIR.."/mtime.json", mtimeCache)
 				Screen.debugPrint(5, 5, "Download finished! Unfortunately,", WHITE, BOTTOM_SCREEN)
-				Screen.debugPrint(5, 20, "the Ninjhax build of Homebr3w", WHITE, BOTTOM_SCREEN)
+				Screen.debugPrint(5, 20, "the Ninjhax build of Ch3at", WHITE, BOTTOM_SCREEN)
 				Screen.debugPrint(5, 35, "can not install the App", WHITE, BOTTOM_SCREEN)
 				Screen.debugPrint(5, 50, "automatically. Please use a", WHITE, BOTTOM_SCREEN)
 				Screen.debugPrint(5, 65, "titlemanager (like FBI) and ", WHITE, BOTTOM_SCREEN)
 				Screen.debugPrint(5, 80, "install the .cia manually, it's", WHITE, BOTTOM_SCREEN)
-				Screen.debugPrint(5, 95, "saved in the '/Homebr3w/CIAs'", WHITE, BOTTOM_SCREEN)
+				Screen.debugPrint(5, 95, "saved in the '/Ch3at/CIAs'", WHITE, BOTTOM_SCREEN)
 				Screen.debugPrint(5, 110, "directory.", WHITE, BOTTOM_SCREEN)
 			end
-			
+
 			Screen.debugPrint(5, 195, "Press B to go to title list", WHITE, BOTTOM_SCREEN)
 			Screen.debugPrint(5, 210, "Press Start to go to "..home, WHITE, BOTTOM_SCREEN)
-			
+
 			while true do
 				pad = Controls.read()
 				if Controls.check(pad, KEY_A) and not Controls.check(oldpad, KEY_A) then
@@ -927,7 +927,7 @@ function downloadAndInstall(titleid)
 			Screen.debugPrint(270, line, "[FAILED]", RED, TOP_SCREEN)
 			Screen.debugPrint(5, 195, "Press B to go to title list", WHITE, BOTTOM_SCREEN)
 			Screen.debugPrint(5, 210, "Press Start to go to "..home, WHITE, BOTTOM_SCREEN)
-			
+
 			while true do
 				pad = Controls.read()
 				if Controls.check(pad, KEY_B) and not Controls.check(oldpad, KEY_B) then
@@ -976,7 +976,7 @@ function uninstall(titleid)
 			oldpad = pad
 		end
 	end
-	
+
 	oldpad = pad
 	Screen.waitVblankStart()
 	Screen.refresh()
@@ -1006,7 +1006,7 @@ function uninstall(titleid)
 				Screen.debugPrint(270, line, "[FAILED]", RED, TOP_SCREEN)
 				Screen.debugPrint(5, 195, "Press B to go to title list", WHITE, BOTTOM_SCREEN)
 				Screen.debugPrint(5, 210, "Press Start to go to "..home, WHITE, BOTTOM_SCREEN)
-				
+
 				while true do
 					pad = Controls.read()
 					if Controls.check(pad, KEY_B) and not Controls.check(oldpad, KEY_B) then
@@ -1023,13 +1023,13 @@ function uninstall(titleid)
 			Screen.debugPrint(5, 5, "Ninjhax builds are not able to", WHITE, BOTTOM_SCREEN)
 			Screen.debugPrint(5, 20, "install or uninstall Apps,", WHITE, BOTTOM_SCREEN)
 			Screen.debugPrint(5, 35, "please use the .cia or .3ds", WHITE, BOTTOM_SCREEN)
-			Screen.debugPrint(5, 50, "version of Homebr3w or use a", WHITE, BOTTOM_SCREEN)
+			Screen.debugPrint(5, 50, "version of Ch3at or use a", WHITE, BOTTOM_SCREEN)
 			Screen.debugPrint(5, 65, "titlemanager (like FBI)", WHITE, BOTTOM_SCREEN)
 		end
-		
+
 		Screen.debugPrint(5, 195, "Press B to go to title list", WHITE, BOTTOM_SCREEN)
 		Screen.debugPrint(5, 210, "Press Start to go to "..home, WHITE, BOTTOM_SCREEN)
-		
+
 		while true do
 			pad = Controls.read()
 			if Controls.check(pad, KEY_START) and not Controls.check(oldpad, KEY_START) then
@@ -1045,7 +1045,7 @@ function uninstall(titleid)
 		Screen.debugPrint(270, line, "[FAILED]", RED, TOP_SCREEN)
 		Screen.debugPrint(5, 195, "Press B to go to title list", WHITE, BOTTOM_SCREEN)
 		Screen.debugPrint(5, 210, "Press Start to go to "..home, WHITE, BOTTOM_SCREEN)
-		
+
 		while true do
 			pad = Controls.read()
 			if Controls.check(pad, KEY_B) and not Controls.check(oldpad, KEY_B) then
@@ -1064,7 +1064,7 @@ function optionsMenu()
 	oldpad = pad
 	Screen.waitVblankStart()
 	Screen.refresh()
-	
+
 	Screen.clear(TOP_SCREEN)
 	Screen.debugPrint(5, 5, "Options", YELLOW, TOP_SCREEN)
 	Screen.debugPrint(20, (options_selection * 15) + 5, ">", WHITE, TOP_SCREEN)
@@ -1081,18 +1081,18 @@ function optionsMenu()
 		elseif type(v.value) == "number" then
 			Screen.debugPrint(350, (i * 15) + 5, v.value, YELLOW, TOP_SCREEN)
 		end
-		
+
 		config_keys[#config_keys+1] = k
 		i = i + 1
 	end
-	
+
 	Screen.clear(BOTTOM_SCREEN)
 	Screen.debugPrint(5, 110, "up/down - Select option", WHITE, BOTTOM_SCREEN)
 	Screen.debugPrint(5, 125, "left/right - Change setting", WHITE, BOTTOM_SCREEN)
 	Screen.debugPrint(5, 140, "A - Save", WHITE, BOTTOM_SCREEN)
 	Screen.debugPrint(5, 155, "B - Cancel", WHITE, BOTTOM_SCREEN)
 	Screen.flip()
-	
+
 	while true do
 		pad = Controls.read()
 		if Controls.check(pad, KEY_DDOWN) and not Controls.check(oldpad, KEY_DDOWN) then
@@ -1181,7 +1181,7 @@ function markAsLatest()
 	Screen.debugPrint(5, 5, "Marking all installed Apps as latest...", WHITE, TOP_SCREEN)
 	Screen.clear(BOTTOM_SCREEN)
 	Screen.flip()
-	
+
 	for k,v in pairs(checkInstalled()) do
 		if v and not mtimeCache[k] then
 			mtimeCache[k] = getTitleByID(k).mtime
@@ -1189,7 +1189,7 @@ function markAsLatest()
 	end
 	saveTable(APP_DIR.."/mtime.json", mtimeCache)
 	Screen.debugPrint(5, 20, "Done! Press A to continue.", WHITE, TOP_SCREEN)
-	
+
 	while true do
 		pad = Controls.read()
 		if Controls.check(pad, KEY_A) and not Controls.check(oldpad, KEY_A) then
@@ -1203,7 +1203,7 @@ function menu()
 	local menu_options = {
 		{
 			text = "Set search filter",
-			callback = function() 
+			callback = function()
 				kbState = nil
 				Keyboard.show()
 				searchApp()
@@ -1239,24 +1239,24 @@ function menu()
 		Screen.debugPrint(5, 140, "AFgt - For testing this tool", WHITE, BOTTOM_SCREEN)
 		Screen.debugPrint(5, 155, "Nai - For testing this tool", WHITE, BOTTOM_SCREEN)
 		Screen.debugPrint(5, 205, "v"..APP_VERSION, WHITE, BOTTOM_SCREEN)
-		Screen.debugPrint(5, 220, "Homebr3w by Wolvan", WHITE, BOTTOM_SCREEN)
+		Screen.debugPrint(5, 220, "Ch3at by no1dead", WHITE, BOTTOM_SCREEN)
 	end
 	local function printTopScreen()
 		Screen.clear(TOP_SCREEN)
-		Screen.debugPrint(5, 5, "Homebr3w v"..APP_VERSION, YELLOW, TOP_SCREEN)
+		Screen.debugPrint(5, 5, "Ch3at v"..APP_VERSION, YELLOW, TOP_SCREEN)
 		Screen.debugPrint(20, (menu_selection * 15) + 5, ">", WHITE, TOP_SCREEN)
 		for k,v in pairs(menu_options) do
 			Screen.debugPrint(30, (k * 15) + 5, v.text, WHITE, TOP_SCREEN)
 		end
 	end
-	
+
 	oldpad = pad
 	Screen.refresh()
 	Screen.waitVblankStart()
 	printTopScreen()
 	printBottomScreen()
 	Screen.flip()
-	
+
 	while true do
 		pad = Controls.read()
 		if Controls.check(pad, KEY_DDOWN) and not Controls.check(oldpad, KEY_DDOWN) then
@@ -1305,14 +1305,14 @@ function printTitleInfo(titleid)
 			Screen.debugPrint(58, 20, "by "..title.author:sub(1, 24), WHITE, BOTTOM_SCREEN)
 			Screen.debugPrint(58, 35, title.author:sub(25), WHITE, BOTTOM_SCREEN)
 		end
-		
+
 		if #title.description < 33 then
 			Screen.debugPrint(5, 60, title.description, WHITE, BOTTOM_SCREEN)
 		else
 			Screen.debugPrint(5, 60, title.description:sub(1, 33), WHITE, BOTTOM_SCREEN)
 			Screen.debugPrint(5, 75, title.description:sub(34), WHITE, BOTTOM_SCREEN)
 		end
-		
+
 		Screen.debugPrint(5, 100, "TID: "..title.titleid, WHITE, BOTTOM_SCREEN)
 		local lastUpdated = title.create_time
 		if title.update_time then lastUpdated = title.update_time end
@@ -1340,9 +1340,9 @@ function printTitleInfo(titleid)
 		elseif installedState == INSTALLED_STATE.LATEST_VERSION then
 			Screen.debugPrint(5, 145, "Latest version installed!", GREEN, BOTTOM_SCREEN)
 		end
-		
+
 		if System.checkBuild() == 1 and installedState ~= INSTALLED_STATE.NOT_INSTALLED then Screen.debugPrint(5, 160, "Press X to start app", GREEN, BOTTOM_SCREEN) end
-		
+
 		Screen.debugPrint(5, 180, "Press Y to show QR Code", WHITE, BOTTOM_SCREEN)
 		if System.checkBuild() ~= 1 then
 			Screen.debugPrint(5, 195, "Press A to download", WHITE, BOTTOM_SCREEN)
@@ -1390,7 +1390,7 @@ function printTopScreen()
 	if canUpdate then
 		screenHeightVar = 12
 	end
-	Screen.debugPrint(5, 5, "Homebr3w v"..APP_VERSION.." - A homebrew browser", RED, TOP_SCREEN)
+	Screen.debugPrint(5, 5, "Ch3at v"..APP_VERSION.." - A homebrew browser", RED, TOP_SCREEN)
 	printTitleList()
 	if canUpdate then Screen.debugPrint(5, 205, "Update version "..remVer.major.."."..remVer.minor.."."..remVer.patch.." now available!", RED, TOP_SCREEN) end
 	Screen.debugPrint(5, 220, "Sort mode "..sortMode..": "..sortModes[sortMode].text, RED, TOP_SCREEN)
@@ -1405,7 +1405,7 @@ function main()
 	Screen.debugPrint(5, 210, "Press L/R to sort list", WHITE, BOTTOM_SCREEN)
 	Screen.debugPrint(5, 225, "Press Start to access menu", WHITE, BOTTOM_SCREEN)
 	Screen.flip()
-	
+
 	local scrollDelay = 50
 	local timeUntilScrolling = scrollDelay + 550
 	while true do
@@ -1547,20 +1547,20 @@ function init()
 	Screen.clear(BOTTOM_SCREEN)
 	Screen.waitVblankStart()
 	Screen.flip()
-	
+
 	local line = 5
-	Screen.debugPrint(5, line, "Initialising Homebr3w, please wait...", WHITE, TOP_SCREEN)
-	
-	-- Migrate Homebr3w Data Dir
+	Screen.debugPrint(5, line, "Initialising Ch3at, please wait...", WHITE, TOP_SCREEN)
+
+	-- Migrate Ch3at Data Dir
 	System.createDirectory("/3ds")
 	System.createDirectory("/3ds/data")
-	System.renameDirectory("/Homebr3w", APP_DIR)
-	
+	System.renameDirectory("/Ch3at", APP_DIR)
+
 	line = 20
 	Screen.debugPrint(5, line, "Checking Wi-Fi...", WHITE, TOP_SCREEN)
 	checkWifi()
 	Screen.debugPrint(270, line, "[OK]", GREEN, TOP_SCREEN)
-	
+
 	line = 35
 	Screen.debugPrint(5, line, "Checking Libraries...", WHITE, TOP_SCREEN)
 	checkLibraries()
@@ -1568,7 +1568,7 @@ function init()
 		libraries[v.name] = dofile(APP_LIBS_DIR.."/"..v.filename)
 	end
 	Screen.debugPrint(270, line, "[OK]", GREEN, TOP_SCREEN)
-	
+
 	line = 50
 	Screen.debugPrint(5, line, "Loading config...", WHITE, TOP_SCREEN)
 	if loadConfig() then
@@ -1583,7 +1583,7 @@ function init()
 	else
 		Screen.debugPrint(270, line, "[FAILED]", RED, TOP_SCREEN)
 	end
-	
+
 	line = 65
 	Screen.debugPrint(5, line, "Retrieving Applist...", WHITE, TOP_SCREEN)
 	local tries = 0
@@ -1592,7 +1592,7 @@ function init()
 		tries = tries + 1
 		success, tbl = getJSON(API_URL.."v0/")
 	end
-	
+
 	if not success then
 		showError("Error occured while fetching remote data\nPress A to try again\nPress B to return to "..home..".", function()
 			pad = Controls.read()
@@ -1606,16 +1606,16 @@ function init()
 	end
 	parsedApplist = tbl
 	Screen.debugPrint(270, line, "[OK]", GREEN, TOP_SCREEN)
-	
+
 	line = 80
-	Screen.debugPrint(5, line, "Retrieving Homebr3w info...", WHITE, TOP_SCREEN)
+	Screen.debugPrint(5, line, "Retrieving Ch3at info...", WHITE, TOP_SCREEN)
 	tries = 0
 	local success_hbi, tbl_hbi = false, {}
 	while (tries < config.downloadRetryCount.value) and (not success_hbi) do
 		tries = tries + 1
-		success_hbi, tbl_hbi = getJSON("https://raw.githubusercontent.com/Wolvan/Homebr3w/master/data/blacklist.json", "GET")
+		success_hbi, tbl_hbi = getJSON("https://raw.githubusercontent.com/no1dead/Ch3at/master/data/blacklist.json", "GET")
 	end
-	
+
 	if not success_hbi then
 		blacklistedApps = nil
 		Screen.debugPrint(270, line, "[FAILED]", RED, TOP_SCREEN)
@@ -1624,7 +1624,7 @@ function init()
 		saveTable(APP_DIR.."/blacklist.json", blacklistedApps)
 		Screen.debugPrint(270, line, "[OK]", GREEN, TOP_SCREEN)
 	end
-	
+
 	line = 95
 	Screen.debugPrint(5, line, "Checking for Updates...", WHITE, TOP_SCREEN)
 	if config.enableUpdateCheck.value then
@@ -1632,9 +1632,9 @@ function init()
 		success, tbl = false, {}
 		while (tries < config.downloadRetryCount.value) and (not success) do
 			tries = tries + 1
-			success, tbl = getJSON("https://api.github.com/repos/Wolvan/Homebr3w/releases/latest")
+			success, tbl = getJSON("https://api.github.com/repos/no1dead/Ch3at/releases/latest")
 		end
-		
+
 		if not success then
 			Screen.debugPrint(270, line, "[FAILED]", RED, TOP_SCREEN)
 		else
@@ -1646,24 +1646,24 @@ function init()
 	else
 		Screen.debugPrint(270, line, "[SKIPPED]", YELLOW, TOP_SCREEN)
 	end
-	
+
 	line = 110
 	Screen.debugPrint(5, line, "Checking cache...", WHITE, TOP_SCREEN)
 	lastUpdateCache = loadTable(APP_CACHE.."/last_updated.json", lastUpdateCache)
 	checkCache(parsedApplist)
 	if not blacklistedApps then
 		local loadedBlacklist = loadTable(APP_DIR.."/blacklist.json", {})
-		if loadedBlacklist then blacklistedApps = loadedBlacklist 
+		if loadedBlacklist then blacklistedApps = loadedBlacklist
 		else blacklistedApps = {} end
 	end
 	mtimeCache = loadTable(APP_DIR.."/mtime.json", {}) or {}
 	Screen.debugPrint(270, line, "[OK]", GREEN, TOP_SCREEN)
-	
+
 	line = 125
 	Screen.debugPrint(5, line, "Checking installed CIAs...", WHITE, TOP_SCREEN)
 	installed = checkInstalled()
 	Screen.debugPrint(270, line, "[OK]", GREEN, TOP_SCREEN)
-	
+
 	line = 140
 	Screen.debugPrint(5, line, "Finishing init process...", WHITE, TOP_SCREEN)
 	parsedApplist = table.filter(parsedApplist, function (item)
@@ -1678,7 +1678,7 @@ function init()
 	fullApplist = deepcopy(parsedApplist)
 	sortAppList()
 	Screen.debugPrint(270, line, "[OK]", GREEN, TOP_SCREEN)
-	
+
 	Screen.clear(TOP_SCREEN)
 	Screen.clear(BOTTOM_SCREEN)
 	main()
