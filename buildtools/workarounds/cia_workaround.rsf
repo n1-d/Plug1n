@@ -1,12 +1,12 @@
 BasicInfo:
-  Title                   : "Homebr3w"
+  Title                   : "Ch3at"
   CompanyCode             : "00"
-  ProductCode             : "CTR-P-HBRW"
+  ProductCode             : "CTR-P-CHTR"
   ContentType             : Application
   Logo                    : Nintendo # Nintendo / Licensed / Distributed / iQue / iQueForSystem
 
 TitleInfo:
-  UniqueId                : 0x1309
+  UniqueId                : 0x6969
   Category                : Application
   
 CardInfo:

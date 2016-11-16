@@ -1,13 +1,13 @@
 NAME = "$(OUTFILE_NAME)"
-DESCRIPTION = "Homebrew Browser for 3ds"
-AUTHOR = "Wolvan"
+DESCRIPTION = "Ch3at Browser for 3ds"
+AUTHOR = "no1dead"
 
 ASSET_DIR = assets
 BUILDTOOLS_DIR = buildtools
 BUILD_DIR = build
 TMP_DIR = $(BUILD_DIR)/tmp
 SRC_DIR = script
-OUTFILE_NAME = Homebr3w
+OUTFILE_NAME = Ch3at
 
 ifdef SYSTEMROOT
    PLATFORM = win32

@@ -25,11 +25,11 @@ local RED = Color.new(255,0,0)
 local GREEN = Color.new(55,255,0)
 local BLUE = Color.new(70,50,250)
 
-local APP_VERSION = "1.4.0"
-local APP_DIR = "/3ds/data/Homebr3w"
+local APP_VERSION = "1.0.0"
+local APP_DIR = "/3ds/data/Ch3at"
 local APP_CACHE = APP_DIR.."/Cache"
 local APP_CONFIG = APP_DIR.."/config.json"
-local APP_CIA_DIR = APP_DIR.."/CIAs"
+local APP_CIA_DIR = APP_DIR.."/NTR_Plugins"
 local APP_LIBS_DIR = APP_DIR.."/Libraries"
 local APP_TEMP_DIR = APP_DIR.."/tmp"
 local INSTALLED_STATE = {
@@ -429,8 +429,8 @@ function showError(errorMsg, keypressFunction)
 		Screen.debugPrint(5, ((k-1)*15)+5, v, RED, TOP_SCREEN)
 	end
 	Screen.debugPrint(5, 95, "GitHub can be found at", WHITE, BOTTOM_SCREEN)
-	Screen.debugPrint(5, 110, "https://github.com/Wolvan", WHITE, BOTTOM_SCREEN)
-	Screen.debugPrint(5, 125, "/Homebr3w", WHITE, BOTTOM_SCREEN)
+	Screen.debugPrint(5, 110, "https://github.com/no1dead", WHITE, BOTTOM_SCREEN)
+	Screen.debugPrint(5, 125, "/Ch3at", WHITE, BOTTOM_SCREEN)
 	while true do
 		keypressFunction()
 	end
@@ -503,7 +503,7 @@ function checkForExit()
 	end
 end
 
-local useragent = "Connection: keep-alive\nUser-Agent: Homebr3w/"..APP_VERSION
+local useragent = "Connection: keep-alive\nUser-Agent: Ch3at/"..APP_VERSION
 --[[
 	Function to download File from Internet
 ]]--
@@ -515,11 +515,11 @@ function getFile(path, downloadURL, method, data)
 	if config.enableAnalytics.value then
 		local cUUID = dataStore.client_uuid or "00000000-0000-0000-0000-000000000000"
 		if downloadURL:find("?") then
-			if cUUID then downloadURL = downloadURL.."&homebr3wUUID="..cUUID end
+			if cUUID then downloadURL = downloadURL.."&ch3atUUID="..cUUID end
 		else
-			if cUUID then downloadURL = downloadURL.."?homebr3wUUID="..cUUID end
+			if cUUID then downloadURL = downloadURL.."?ch3atUUID="..cUUID end
 		end
-		jsondata = '{"homebr3wUUID":"'..cUUID..'"}'
+		jsondata = '{"ch3atUUID":"'..cUUID..'"}'
 		data.homebr3wUUID = cUUID
 	end
 	if libraries["dkjson"] then
@@ -555,11 +555,11 @@ function getJSON(url, method, data)
 	if config.enableAnalytics.value then
 		local cUUID = dataStore.client_uuid or "00000000-0000-0000-0000-000000000000"
 		if url:find("?") then
-			if cUUID then url = url.."&homebr3wUUID="..cUUID end
+			if cUUID then url = url.."&ch3atUUID="..cUUID end
 		else
-			if cUUID then url = url.."?homebr3wUUID="..cUUID end
+			if cUUID then url = url.."?ch3atUUID="..cUUID end
 		end
-		jsondata = '{"homebr3wUUID":"'..cUUID..'"}'
+		jsondata = '{"ch3atUUID":"'..cUUID..'"}'
 		data.homebr3wUUID = cUUID
 	end
 	if libraries["dkjson"] then
