@@ -45,4 +45,6 @@ You can also use `make clean` to remove all built files.
 
 [TitleDB.com](https://titledb.com/) - as Database to pull the apps from
 
+[Wolvan](https://github.com/Wolvan/) for making [Homebr3w](https://github.com/Wolvan/homebr3w), and helping me out with this.
+
 The people from the /hbg/ Discord - Beta testing
