@@ -18,7 +18,8 @@ function createBuildPage {
 		echo -e "| [$f](https://$GH_REPO_USER.github.io/$GH_REPOSITORY/build/$f) | `du -h $f | cut -f1` |" >> index.md
 	done
 	cd ..
-	echo -e "\nQR Code for Homebr3w.cia Build:<br>![QR Code](https://$GH_REPO_USER.github.io/$GH_REPOSITORY/build/QRCode.jpg)" >> build/index.md
+	echo -e "\nQR Code for Ch3at.cia Build:<br>![QR Code](https://$GH_REPO_USER.github.io/$GH_REPOSITORY/build/QRCode.jpg)" >> build/index.md
+	cp buildtools/NightlyQR.jpg build/QRCode.jpg
 }
 
 if [ "$TRAVIS_REPO_SLUG" == "$GH_REPO" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "$GH_CI_BRANCH" ]; then
@@ -29,13 +30,14 @@ if [ "$TRAVIS_REPO_SLUG" == "$GH_REPO" ] && [ "$TRAVIS_PULL_REQUEST" == "false" 
   git remote set-branches --add origin gh-pages
   git fetch
   git checkout -f -t -b gh-pages origin/gh-pages
-  git merge --no-commit --no-ff $GH_CI_BRANCH -m "Merge $GH_CI_BRANCH $TRAVIS_COMMIT"
+  git merge --allow-unrelated-histories --no-commit --no-ff $GH_CI_BRANCH -m "Merge $GH_CI_BRANCH $TRAVIS_COMMIT"
   git reset
   make tarzip
   git add -f build
   git diff --staged --quiet build || {
 	createBuildPage
 	git add -f build/index.md
+	git add -f build/QRCode.jpg
     git commit -m "Pushing build based on commit $TRAVIS_COMMIT"
 	git push -fq https://"$GH_TOKEN"@github.com/"$GH_REPO" gh-pages > /dev/null
 	echo -e "Pushed new build to gh_pages.\n"
