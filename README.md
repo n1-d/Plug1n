@@ -1,15 +1,15 @@
-#Ch3at
-Download and install NTR Cheat Plugins for your 3ds easily! App based on [Homebr3w](https://github.com/Wolvan/Homebr3w)
+#Plug1n
+Download and install NTR Plugins for your 3ds easily! App based on [Homebr3w](https://github.com/Wolvan/Homebr3w)
 
 ##Usage
-Simply download the .cia file from the [releases page](https://github.com/no1dead/Ch3at/releases) and install it with your favorite .cia Installer, for example FBI. You can also just scan the QR Code from the releases page as well.
+Simply download the .cia file from the [releases page](https://github.com/no1dead/Plug1n/releases) and install it with your favorite .cia Installer, for example FBI. You can also just scan the QR Code from the releases page as well.
 
 You can also use the .3ds version for a flashcard or the .3dsx version for *hax.
 
 Note: The .3dsx version does not support launching freeShop through it, the option is disabled.
 
 ## Nightlies
-Nightlies are available at [the official automatic Nightly build page](https://wolvan.github.io/Homebr3w/build/) and build whenever changes get pushed to the `master` branch
+Nightlies are available at [the official automatic Nightly build page](https://wolvan.github.io/Plug1n/build/) and build whenever changes get pushed to the `master` branch
 
 ## Differences between Builds
 There are 2 different builds available, the `.3ds`/`.cia` build and the `.3dsx` NH(2) Build.
