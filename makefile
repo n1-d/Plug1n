@@ -1,5 +1,5 @@
 NAME = "$(OUTFILE_NAME)"
-DESCRIPTION = "Ch3at Browser for 3ds"
+DESCRIPTION = "Plug1n Browser for 3ds"
 AUTHOR = "no1dead"
 
 ASSET_DIR = assets
@@ -7,7 +7,7 @@ BUILDTOOLS_DIR = buildtools
 BUILD_DIR = build
 TMP_DIR = $(BUILD_DIR)/tmp
 SRC_DIR = script
-OUTFILE_NAME = Ch3at
+OUTFILE_NAME = Plug1n
 
 ifdef SYSTEMROOT
    PLATFORM = win32
@@ -78,7 +78,7 @@ makedirectories: cleanfiles
 cleanfiles:
 	@echo Cleaning up previous builds
 	rm -rf $(BUILD_DIR)
-	
+
 banner: $(ASSET_DIR)/audio.cwav $(ASSET_DIR)/banner.png $(ASSET_DIR)/icon.png
 	@echo Making banner
 	$(BUILDTOOLS_DIR)/$(PLATFORM)/bannertool makebanner -ci "$(ASSET_DIR)/banner.cgfx" -ca "$(ASSET_DIR)/audio.cwav" -o "$(TMP_DIR)/banner.bin"
@@ -90,7 +90,7 @@ romfs:
 cleantempfiles:
 	@echo Cleaning up temp files
 	rm -rf "$(TMP_DIR)"
-	mkdir $(TMP_DIR)	
+	mkdir $(TMP_DIR)
 alltar: clean 3ds 3dsxpack cia cleantempfiles
 allzip: clean 3ds 3dsxzip cia cleantempfiles
 
@@ -104,7 +104,7 @@ cia: banner romfs
 	@echo Building .3dsx
 	rm -rf $(BUILD_DIR)/$(OUTFILE_NAME)
 	cp -r "$(SRC_DIR)" "$(BUILD_DIR)/$(OUTFILE_NAME)"
-	mv "$(BUILD_DIR)/$(OUTFILE_NAME)/Descriptor.xml" "$(BUILD_DIR)/$(OUTFILE_NAME)/$(OUTFILE_NAME).xml" 
+	mv "$(BUILD_DIR)/$(OUTFILE_NAME)/Descriptor.xml" "$(BUILD_DIR)/$(OUTFILE_NAME)/$(OUTFILE_NAME).xml"
 	cp "$(TMP_DIR)/icon.bin" "$(BUILD_DIR)/$(OUTFILE_NAME)/$(OUTFILE_NAME).smdh"
 	cp "$(BUILDTOOLS_DIR)/lpp3ds/lpp-3ds.3dsx" "$(BUILD_DIR)/$(OUTFILE_NAME)/$(OUTFILE_NAME).3dsx"
 3dsxpack: 3dsx

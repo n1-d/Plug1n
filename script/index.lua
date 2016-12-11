@@ -1,10 +1,10 @@
 --[[
-	Ch3at
+	Plug1n
 
 	A Homebrew Application to download other Homebrew
 	Apps based on TitleDB.com's database
 
-	Ch3at is licensed under GPL 3.0, the full license
+	Plug1n is licensed under GPL 3.0, the full license
 	can be found in the root of this repository inside of
 	the LICENSE or LICENSE.md file.
 
@@ -26,7 +26,7 @@ local GREEN = Color.new(55,255,0)
 local BLUE = Color.new(70,50,250)
 
 local APP_VERSION = "1.0.0"
-local APP_DIR = "/3ds/data/Ch3at"
+local APP_DIR = "/3ds/data/Plug1n"
 local APP_CACHE = APP_DIR.."/Cache"
 local APP_CONFIG = APP_DIR.."/config.json"
 local APP_CIA_DIR = APP_DIR.."/NTR_Plugins"
@@ -430,7 +430,7 @@ function showError(errorMsg, keypressFunction)
 	end
 	Screen.debugPrint(5, 95, "GitHub can be found at", WHITE, BOTTOM_SCREEN)
 	Screen.debugPrint(5, 110, "https://github.com/no1dead", WHITE, BOTTOM_SCREEN)
-	Screen.debugPrint(5, 125, "/Ch3at", WHITE, BOTTOM_SCREEN)
+	Screen.debugPrint(5, 125, "/Plug1n", WHITE, BOTTOM_SCREEN)
 	while true do
 		keypressFunction()
 	end
@@ -503,7 +503,7 @@ function checkForExit()
 	end
 end
 
-local useragent = "Connection: keep-alive\nUser-Agent: Ch3at/"..APP_VERSION
+local useragent = "Connection: keep-alive\nUser-Agent: Plug1n/"..APP_VERSION
 --[[
 	Function to download File from Internet
 ]]--
@@ -515,12 +515,12 @@ function getFile(path, downloadURL, method, data)
 --[[	if config.enableAnalytics.value then
 		local cUUID = dataStore.client_uuid or "00000000-0000-0000-0000-000000000000"
 		if downloadURL:find("?") then
-			if cUUID then downloadURL = downloadURL.."&ch3atUUID="..cUUID end
+			if cUUID then downloadURL = downloadURL.."&Plug1nUUID="..cUUID end
 		else
-			if cUUID then downloadURL = downloadURL.."?ch3atUUID="..cUUID end
+			if cUUID then downloadURL = downloadURL.."?Plug1nUUID="..cUUID end
 		end
-		jsondata = '{"ch3atUUID":"'..cUUID..'"}'
-		data.Ch3atUUID = cUUID
+		jsondata = '{"Plug1nUUID":"'..cUUID..'"}'
+		data.Plug1nUUID = cUUID
 	end ]]--
 	if libraries["dkjson"] then
 		jsondata = libraries["dkjson"].encode(data)
@@ -555,12 +555,12 @@ function getJSON(url, method, data)
 --[[	if config.enableAnalytics.value then
 		local cUUID = dataStore.client_uuid or "00000000-0000-0000-0000-000000000000"
 		if url:find("?") then
-			if cUUID then url = url.."&ch3atUUID="..cUUID end
+			if cUUID then url = url.."&Plug1nUUID="..cUUID end
 		else
-			if cUUID then url = url.."?ch3atUUID="..cUUID end
+			if cUUID then url = url.."?Plug1nUUID="..cUUID end
 		end
-		jsondata = '{"ch3atUUID":"'..cUUID..'"}'
-		data.Ch3atUUID = cUUID
+		jsondata = '{"Plug1nUUID":"'..cUUID..'"}'
+		data.Plug1nUUID = cUUID
 	end ]]--
 	if libraries["dkjson"] then
 		jsondata = libraries["dkjson"].encode(data)
@@ -897,12 +897,12 @@ function downloadAndInstall(titleid)
 				mtimeCache[title.titleid] = title.mtime
 				saveTable(APP_DIR.."/mtime.json", mtimeCache)
 				Screen.debugPrint(5, 5, "Download finished! Unfortunately,", WHITE, BOTTOM_SCREEN)
-				Screen.debugPrint(5, 20, "the Ninjhax build of Ch3at", WHITE, BOTTOM_SCREEN)
+				Screen.debugPrint(5, 20, "the Ninjhax build of Plug1n", WHITE, BOTTOM_SCREEN)
 				Screen.debugPrint(5, 35, "can not install the App", WHITE, BOTTOM_SCREEN)
 				Screen.debugPrint(5, 50, "automatically. Please use a", WHITE, BOTTOM_SCREEN)
 				Screen.debugPrint(5, 65, "titlemanager (like FBI) and ", WHITE, BOTTOM_SCREEN)
 				Screen.debugPrint(5, 80, "install the .cia manually, it's", WHITE, BOTTOM_SCREEN)
-				Screen.debugPrint(5, 95, "saved in the '/Ch3at/CIAs'", WHITE, BOTTOM_SCREEN)
+				Screen.debugPrint(5, 95, "saved in the '/Plug1n/CIAs'", WHITE, BOTTOM_SCREEN)
 				Screen.debugPrint(5, 110, "directory.", WHITE, BOTTOM_SCREEN)
 			end
 
@@ -1023,7 +1023,7 @@ function uninstall(titleid)
 			Screen.debugPrint(5, 5, "Ninjhax builds are not able to", WHITE, BOTTOM_SCREEN)
 			Screen.debugPrint(5, 20, "install or uninstall Apps,", WHITE, BOTTOM_SCREEN)
 			Screen.debugPrint(5, 35, "please use the .cia or .3ds", WHITE, BOTTOM_SCREEN)
-			Screen.debugPrint(5, 50, "version of Ch3at or use a", WHITE, BOTTOM_SCREEN)
+			Screen.debugPrint(5, 50, "version of Plug1n or use a", WHITE, BOTTOM_SCREEN)
 			Screen.debugPrint(5, 65, "titlemanager (like FBI)", WHITE, BOTTOM_SCREEN)
 		end
 
@@ -1239,11 +1239,11 @@ function menu()
 		Screen.debugPrint(5, 140, "AFgt - For testing this tool", WHITE, BOTTOM_SCREEN)
 		Screen.debugPrint(5, 155, "Nai - For testing this tool", WHITE, BOTTOM_SCREEN)
 		Screen.debugPrint(5, 205, "v"..APP_VERSION, WHITE, BOTTOM_SCREEN)
-		Screen.debugPrint(5, 220, "Ch3at by no1dead & Wolvan", WHITE, BOTTOM_SCREEN)
+		Screen.debugPrint(5, 220, "Plug1n by no1dead & Wolvan", WHITE, BOTTOM_SCREEN)
 	end
 	local function printTopScreen()
 		Screen.clear(TOP_SCREEN)
-		Screen.debugPrint(5, 5, "Ch3at v"..APP_VERSION, YELLOW, TOP_SCREEN)
+		Screen.debugPrint(5, 5, "Plug1n v"..APP_VERSION, YELLOW, TOP_SCREEN)
 		Screen.debugPrint(20, (menu_selection * 15) + 5, ">", WHITE, TOP_SCREEN)
 		for k,v in pairs(menu_options) do
 			Screen.debugPrint(30, (k * 15) + 5, v.text, WHITE, TOP_SCREEN)
@@ -1390,7 +1390,7 @@ function printTopScreen()
 	if canUpdate then
 		screenHeightVar = 12
 	end
-	Screen.debugPrint(5, 5, "Ch3at v"..APP_VERSION.." - A homebrew browser", RED, TOP_SCREEN)
+	Screen.debugPrint(5, 5, "Plug1n v"..APP_VERSION.." - A NTR Plugin browser", RED, TOP_SCREEN)
 	printTitleList()
 	if canUpdate then Screen.debugPrint(5, 205, "Update version "..remVer.major.."."..remVer.minor.."."..remVer.patch.." now available!", RED, TOP_SCREEN) end
 	Screen.debugPrint(5, 220, "Sort mode "..sortMode..": "..sortModes[sortMode].text, RED, TOP_SCREEN)
@@ -1549,12 +1549,12 @@ function init()
 	Screen.flip()
 
 	local line = 5
-	Screen.debugPrint(5, line, "Initialising Ch3at, please wait...", WHITE, TOP_SCREEN)
+	Screen.debugPrint(5, line, "Initialising Plug1n, please wait...", WHITE, TOP_SCREEN)
 
-	-- Migrate Ch3at Data Dir
+	-- Migrate Plug1n Data Dir
 	System.createDirectory("/3ds")
 	System.createDirectory("/3ds/data")
-	System.renameDirectory("/Ch3at", APP_DIR)
+	System.renameDirectory("/Plug1n", APP_DIR)
 
 	line = 20
 	Screen.debugPrint(5, line, "Checking Wi-Fi...", WHITE, TOP_SCREEN)
@@ -1608,12 +1608,12 @@ function init()
 	Screen.debugPrint(270, line, "[OK]", GREEN, TOP_SCREEN)
 
 	line = 80
-	Screen.debugPrint(5, line, "Retrieving Ch3at info...", WHITE, TOP_SCREEN)
+	Screen.debugPrint(5, line, "Retrieving Plug1n info...", WHITE, TOP_SCREEN)
 	tries = 0
 	local success_hbi, tbl_hbi = false, {}
 	while (tries < config.downloadRetryCount.value) and (not success_hbi) do
 		tries = tries + 1
-		success_hbi, tbl_hbi = getJSON("https://raw.githubusercontent.com/no1dead/Ch3at/master/data/blacklist.json", "GET")
+		success_hbi, tbl_hbi = getJSON("https://raw.githubusercontent.com/no1dead/Plug1n/master/data/blacklist.json", "GET")
 	end
 
 	if not success_hbi then
@@ -1632,7 +1632,7 @@ function init()
 		success, tbl = false, {}
 		while (tries < config.downloadRetryCount.value) and (not success) do
 			tries = tries + 1
-			success, tbl = getJSON("https://api.github.com/repos/no1dead/Ch3at/releases/latest")
+			success, tbl = getJSON("https://api.github.com/repos/no1dead/Plug1n/releases/latest")
 		end
 
 		if not success then
