@@ -1,6 +1,6 @@
 NAME = "$(OUTFILE_NAME)"
 DESCRIPTION = "Plug1n Browser for 3ds"
-AUTHOR = "no1dead"
+AUTHOR = "no1dead & Wolvan"
 
 ASSET_DIR = assets
 BUILDTOOLS_DIR = buildtools
