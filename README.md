@@ -11,13 +11,6 @@ Note: The .3dsx version does not support launching freeShop through it, the opti
 ## Nightlies
 Nightlies are available at [the official automatic Nightly build page](https://wolvan.github.io/Homebr3w/build/) and build whenever changes get pushed to the `master` branch
 
-##Analytics
-This app generates a UUID for each Homebr3w client on first launch which will then be sent to TitleDB.com.
-
-The UUID will be used to collect pseudo-anonymous data to get an idea of how many people use this app, how much people install apps and the like. **If you do not want to be tracked using this, you can turn the UUID sending off in the Settings Menu!**
-
-You can also regenerate the UUID if you delete the `client_uuid` entry from `SDMC:/3ds/data/Ch3at/data.json`, which causes a new ID to be generated for you.
-
 ## Differences between Builds
 There are 2 different builds available, the `.3ds`/`.cia` build and the `.3dsx` NH(2) Build.
 
