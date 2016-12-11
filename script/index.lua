@@ -1239,7 +1239,7 @@ function menu()
 		Screen.debugPrint(5, 140, "AFgt - For testing this tool", WHITE, BOTTOM_SCREEN)
 		Screen.debugPrint(5, 155, "Nai - For testing this tool", WHITE, BOTTOM_SCREEN)
 		Screen.debugPrint(5, 205, "v"..APP_VERSION, WHITE, BOTTOM_SCREEN)
-		Screen.debugPrint(5, 220, "Ch3at by no1dead", WHITE, BOTTOM_SCREEN)
+		Screen.debugPrint(5, 220, "Ch3at by no1dead & Wolvan", WHITE, BOTTOM_SCREEN)
 	end
 	local function printTopScreen()
 		Screen.clear(TOP_SCREEN)
