@@ -79,7 +79,7 @@ cleanfiles:
 	@echo Cleaning up previous builds
 	rm -rf $(BUILD_DIR)
 
-banner: $(ASSET_DIR)/audio.cwav $(ASSET_DIR)/banner.png $(ASSET_DIR)/icon.png
+banner: $(ASSET_DIR)/audio.cwav $(ASSET_DIR)/banner.cgfx $(ASSET_DIR)/icon.png
 	@echo Making banner
 	$(BUILDTOOLS_DIR)/$(PLATFORM)/bannertool makebanner -ci "$(ASSET_DIR)/banner.cgfx" -ca "$(ASSET_DIR)/audio.cwav" -o "$(TMP_DIR)/banner.bin"
 	$(BUILDTOOLS_DIR)/$(PLATFORM)/bannertool makesmdh -i "$(ASSET_DIR)/icon.png" -s $(NAME) -l $(DESCRIPTION) -p $(AUTHOR) -o "$(TMP_DIR)/icon.bin"
